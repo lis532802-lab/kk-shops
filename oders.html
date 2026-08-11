@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders - KK Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">KK <span>Shop</span></a>
+      <div class="nav-actions" id="nav-user-actions"></div>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <h2 class="section-title" style="margin-bottom: 1.5rem;">My Order History</h2>
+    <div id="orders-list-container" style="display: flex; flex-direction: column; gap: 1rem;">
+      <div class="skeleton" style="height: 100px;"></div>
+    </div>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/orders.js"></script>
+</body>
+</html>
