@@ -1,0 +1,38 @@
+@media (max-width: 768px) {
+  .nav-container {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .search-bar-container {
+    order: 3;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .hero-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .support-float span {
+    display: none;
+  }
+
+  .support-float {
+    padding: 0.8rem;
+    border-radius: 50%;
+  }
+
+  .checkout-grid, .profile-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
