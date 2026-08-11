@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details - KK Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">KK <span>Shop</span></a>
+      <div class="nav-actions" id="nav-user-actions"></div>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <div id="product-detail-view" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; background: white; padding: 2rem; border-radius: 16px; border: 1px solid var(--border);">
+      <div class="skeleton" style="height: 400px; border-radius: 12px;"></div>
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <div class="skeleton" style="height: 30px; width: 60%;"></div>
+        <div class="skeleton" style="height: 20px; width: 40%;"></div>
+        <div class="skeleton" style="height: 100px; width: 100%;"></div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+  <script type="module">
+    import { fetchProductById } from "./firebase/firestore.js";
+    import { updateCartBadge } from "./js/app.js";
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('id');
+      const container = document.getElementById('product-detail-view');
+
+      if (!productId) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const product = await fetchProductById(productId);
+      if (!product) {
+        container.innerHTML = `<div class="empty-state"><h3 class="empty-state-title">Product not found.</h3></div>`;
+        return;
+      }
+
+      container.innerHTML = `
+        <img src="${product.imageUrl || 'assets/images/placeholder.webp'}" alt="${product.name}" style="width: 100%; border-radius: 12px; max-height: 450px; object-fit: cover;">
+        <div style="display: flex; flex-direction: column; justify-content: center;">
+          <span style="color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.85rem;">${product.category || 'General'}</span>
+          <h1 style="font-size: 2rem; margin: 0.5rem 0; font-weight: 800;">${product.name}</h1>
+          <p style="font-size: 1.8rem; font-weight: 800; color: var(--dark); margin-bottom: 1rem;">$${Number(product.price).toFixed(2)}</p>
+          <p style="color: #4B5563; margin-bottom: 1.5rem; line-height: 1.6;">${product.description || 'No detailed description available for this item.'}</p>
+          <button id="add-to-cart-btn" class="btn btn-primary" style="padding: 1rem; font-size: 1rem;">Add To Shopping Cart</button>
+        </div>
+      `;
+
+      document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+        let cart = JSON.parse(localStorage.getItem('kk_cart') || '[]');
+        const existing = cart.find(item => item.id === product.id);
+        if (existing) {
+          existing.quantity += 1;
+        } else {
+          cart.push({ ...product, quantity: 1 });
+        }
+        localStorage.setItem('kk_cart', JSON.stringify(cart));
+        updateCartBadge();
+        window.showToast('Item successfully added to cart');
+      });
+    });
+  </script>
+</body>
+</html>
