@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - KK Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">KK <span>Shop</span></a>
+      <div class="nav-actions" id="nav-user-actions"></div>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <h2 class="section-title" style="margin-bottom: 1.5rem;">Checkout</h2>
+    <form id="checkout-form" class="checkout-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+      <div style="background: white; border: 1px solid var(--border); padding: 2rem; border-radius: 16px;">
+        <h3 style="margin-bottom: 1.25rem;">Shipping Information</h3>
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" id="cust-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" id="cust-phone" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Full Delivery Address</label>
+          <textarea id="cust-address" class="form-control" rows="3" required></textarea>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label">District</label>
+            <input type="text" id="cust-district" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Area</label>
+            <input type="text" id="cust-area" class="form-control" required>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: white; border: 1px solid var(--border); padding: 1.5rem; border-radius: 16px; height: fit-content;">
+        <h3 style="margin-bottom: 1rem;">Payment Method</h3>
+        <p style="font-size: 0.9rem; color: #4B5563; margin-bottom: 1.5rem;">Cash on Delivery (COD) Enabled</p>
+        <button type="submit" id="place-order-btn" class="btn btn-primary" style="width: 100%;">Place Order Now</button>
+      </div>
+    </form>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/checkout.js"></script>
+</body>
+</html>
